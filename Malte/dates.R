@@ -54,8 +54,12 @@ source("Malte/first_concert_last_sale.R")
 
 first.concert(pur, "Maroon 5")
 
-maroon2 <- filter(maroon, event_dt == "2015-03-05")
-maroon2$dates <- substr(maroon2$sales_ord_create_dttm, 1, 10)
+maroon2 <- filter(maroon, event_id == "0843456c61cc06f2db5b")
+maroon2$dates <- strtrim(maroon2$sales_ord_create_dttm, 10)
 maroon2 <- group_by(maroon2, dates)
 daily.sales <- summarise(maroon2, daily.sales = sum(tickets_purchased_qty))
 
+maroon$dates <- strtrim(maroon$sales_ord_create_dttm, 10)
+maroon <- merge(maroon, daily.sales, by="dates")
+
+write.csv(daily.sales, "daily_sales.csv")
