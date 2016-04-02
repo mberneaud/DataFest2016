@@ -49,4 +49,4 @@ conc2 <- conc2[order(-TicketPr.m),]
 
 ## Check if duplicates
 sum(duplicated(conc2, by=c("primary_act_name", "event_date_time")))
-
+head(conc2, n=10)
