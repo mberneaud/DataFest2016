@@ -35,7 +35,7 @@ dat$date <- gsub(pattern = "-", replacement = "", dat$date) # Remove - from date
 trends <- read.csv("C:/Users/Christopher/Google Drive/GitHub/DataFest2016/Trends/Coldplay Chicago.csv", header = FALSE)
 trends <- rename(trends, replace = c("V1" = "date"))
 trends$date <- gsub(pattern = "-", replacement = "", trends$date) # Remove - from date
-trends$date <- substr(trends$date, 1, 8)
+trends$date <- substr(trends$date, 1, 8) # Keep only the first 8 digits
 trends$geonetwork_metro <- rep("Chicago IL", c(nrow(trends))) # Add region
 
 test <- join(dat, trends, by = c("geonetwork_metro", "date"), type = "left")
